@@ -2,7 +2,10 @@ package com.qfedu.commonadmin.service;
 
 import com.qfedu.commonadmin.domain.LoginLog;
 import com.qfedu.commonadmin.domain.User;
+import com.qfedu.commonadmin.vo.MenuVo;
 import com.qfedu.commonadmin.vo.R;
+
+import java.util.List;
 
 /**
  *@Author feri
@@ -18,6 +21,11 @@ public interface UserService {
     User login(String name,String password);
 
     void saveLog(LoginLog loginLog);
+    //更新角色
+    R updateRole(int[] rids,int uid);
+
+
+    List<MenuVo> queryMenu(int uid);
 
 
 }

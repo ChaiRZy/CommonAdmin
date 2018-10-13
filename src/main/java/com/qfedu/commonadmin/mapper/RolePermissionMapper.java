@@ -11,4 +11,5 @@ public interface RolePermissionMapper {
     @Insert("insert into t_rolepermission (rid, pid) values (#{rid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER})")
     int insert(RolePermission record);
 
+
 }

@@ -4,15 +4,18 @@ import com.qfedu.commonadmin.common.ResultUtil;
 import com.qfedu.commonadmin.domain.LoginLog;
 import com.qfedu.commonadmin.domain.User;
 import com.qfedu.commonadmin.service.UserService;
+import com.qfedu.commonadmin.vo.MenuVo;
 import com.qfedu.commonadmin.vo.R;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  *@Author feri
@@ -35,16 +38,14 @@ public class UserController {
             loginLog.setIp(request.getRemoteAddr());
             loginLog.setUid(user.getId());
             userService.saveLog(loginLog);
-
             //通知Shiro登录成功
             Subject subject=SecurityUtils.getSubject();
             UsernamePasswordToken token=new UsernamePasswordToken(name,password);
-            if(rm!=null && rm.length()>0) {
-                token.setRememberMe(true);
-            }
+//            if(rm!=null && rm.length()>0) {
+//                token.setRememberMe(true);
+//            }
             subject.getSession().setAttribute("user",user);
             subject.login(token);
-
             return ResultUtil.setOK("登录成功");
         }else {
             return ResultUtil.setERROR("用户名或密码错误");
@@ -54,6 +55,13 @@ public class UserController {
     @PostMapping("userregister.do")
     public R save(User user){
         return userService.save(user);
+    }
+
+    //查询左菜单
+    @GetMapping("usermenus.do")
+    public List<MenuVo> menus(){
+        User user= (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        return userService.queryMenu(user.getId());
     }
 
 

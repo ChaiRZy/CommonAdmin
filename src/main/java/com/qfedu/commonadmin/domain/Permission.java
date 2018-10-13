@@ -7,7 +7,6 @@ public class Permission {
 
     private String name;
 
-    private String url;
     private String pers;
 
     public String getPers() {
@@ -42,14 +41,6 @@ public class Permission {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
     public Integer getParentid() {
         return parentid;
     }
@@ -80,5 +71,18 @@ public class Permission {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", pers='" + pers + '\'' +
+                ", parentid=" + parentid +
+                ", icon='" + icon + '\'' +
+                ", type=" + type +
+                ", createdate=" + createdate +
+                '}';
     }
 }

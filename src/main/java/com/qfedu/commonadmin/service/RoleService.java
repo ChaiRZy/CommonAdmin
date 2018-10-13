@@ -11,6 +11,7 @@ import com.qfedu.commonadmin.vo.R;
 public interface RoleService {
 
     R save(Role role);
-
+    //更新角色权限
+    R updatePermission(int[] pids,int rid);
 
 }
